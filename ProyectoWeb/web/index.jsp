@@ -15,10 +15,11 @@
     <body>
         <div id="content">
             <div id="header_1">
+                <img src="images/crow.png" alt="Inicio" height="125" width="125"/>
                 <h1 id="tit">Sort Krage</h1>
                 <ul id="menu_1">
                     <li><a href="#Instalar">Instalar</a></li>
-                    <li><a href="#InicarSesion">Iniciar Sesión</a></li>
+                    <li><a href="core/login.jsp">Iniciar Sesión</a></li>
                 </ul>
             </div>
             <div id="header_2">
@@ -31,7 +32,7 @@
                 </ul>
             </div>
             <div id="wigdet_1">
-                
+
             </div>
         </div>
     </body>
