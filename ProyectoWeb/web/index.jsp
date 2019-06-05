@@ -15,7 +15,9 @@
     <body>
         <div id="content">
             <div id="header_1">
-                <img src="images/crow.png" alt="Inicio" height="125" width="125"/>
+                <a href="index.jsp">
+                    <img src="images/crow.png" alt="Inicio" height="125" width="125"/>
+                </a>
                 <h1 id="tit">Sort Krage</h1>
                 <ul id="menu_1">
                     <li><a href="#Instalar">Instalar</a></li>
@@ -28,11 +30,10 @@
                     <li><a href="#Explorar">Explorar</a></li>
                     <li><a href="#Soporte">Documentación</a></li>
                     <li><a href="#AcercaDe">Acerca de</a></li>
-                    <li><a href="#Usuario">Usuario</a></li>
+                    <li style="float: right"><a href="#Usuario">Usuario</a></li>
                 </ul>
             </div>
             <div id="wigdet_1">
-
             </div>
         </div>
     </body>
