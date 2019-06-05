@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel=stylesheet href="login.css" type="text/css">
+        <link rel=stylesheet href="CrearCuenta.css" type="text/css">
         <title>Inicia Sesión</title>
     </head>
     <body>
@@ -22,21 +22,22 @@
         <div id="core">
             <div id="content">
                 <form>
+                    <p>Nombre:</p>
+                    <input type="text" name="nombre"/>
+                    <p>Apellidos: </p>
+                    <input type="text" name="ape"/>
                     <p>Usuario: </p>
                     <input type="text" name="usuario"/>
                     <p>Contraseña: </p>
                     <input type="password" name="contrasenia"/>
                     <br/><br/>
-                    <input type="button" value="Iniciar Sesión"/>
+                    <input type="button" value="Crear Cuenta"/>
                     <a href="../index.jsp" style="text-decoration: none">
                         <input type="button" value="Cancelar">
                     </a>
-                    <p>
-                        ¿No tienes cuenta? <a href="CrearCuenta.jsp">Crea una</a>
-                    </p>
                 </form>
 
             </div>
         </div>
     </body>
-</html>
+</html> 
