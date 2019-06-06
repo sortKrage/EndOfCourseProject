@@ -5,6 +5,7 @@
  */
 package vista;
 
+import controlador.Usuario;
 import java.awt.Color;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -14,22 +15,22 @@ import javax.swing.JFrame;
  * @author sortkrage
  */
 public class Main extends javax.swing.JFrame {
-    
-    public static String _USU = "Test";
+
+    public static Usuario _USU = new Usuario();
 
     /**
      * Creates new form Main
      */
     public Main() {
-        
+
         JDialog j = new Login(this, true);
         j.setVisible(true);
         initComponents();
         setLocationRelativeTo(this);
         this.getContentPane().setBackground(Color.DARK_GRAY);
         jPanel1.setBackground(Color.BLACK);
-        jMenuItemUsu.setText(_USU);
-        
+        jMenuItemUsu.setText(_USU.getNick());
+
     }
 
     /**
@@ -123,7 +124,7 @@ public class Main extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel5.setForeground(java.awt.Color.blue);
-        jLabel5.setText("!Gestiona tu negocio con Hibernate¡");
+        jLabel5.setText("¡Gestiona tu negocio con Hibernate!");
 
         jLabel6.setText("Ya disponible en la sección de descargas la aplicación \"HbernateApp\" para tu negocio");
 
@@ -195,6 +196,11 @@ public class Main extends javax.swing.JFrame {
         jMenuItemUsu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItemUsu.setMnemonic('u');
         jMenuItemUsu.setText("Usuario");
+        jMenuItemUsu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemUsuActionPerformed(evt);
+            }
+        });
         jMenuUsu.add(jMenuItemUsu);
 
         jMenuBar1.add(jMenuUsu);
@@ -241,21 +247,30 @@ public class Main extends javax.swing.JFrame {
 
     private void jMenuItemAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAbrirActionPerformed
         // TODO add your handling code here:
-        
+
         JFrame frame = new Abrir();
-        
+
         frame.setVisible(true);
-        
+
     }//GEN-LAST:event_jMenuItemAbrirActionPerformed
 
     private void jMenuItemAcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAcercaDeActionPerformed
         // TODO add your handling code here:
-        
+
         JFrame frame = new AcercaDe();
-        
+
         frame.setVisible(true);
-        
+
     }//GEN-LAST:event_jMenuItemAcercaDeActionPerformed
+
+    private void jMenuItemUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUsuActionPerformed
+        // TODO add your handling code here:
+
+        JDialog dialog = new ControlUsu(this, true);
+
+        dialog.setVisible(true);
+
+    }//GEN-LAST:event_jMenuItemUsuActionPerformed
 
     /**
      * @param args the command line arguments

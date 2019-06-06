@@ -5,6 +5,7 @@
  */
 package modelo;
 
+import controlador.Usuario;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -76,6 +77,73 @@ public class Persistencia {
 
             return null;
         }
+    }
+
+    public Usuario getUsuario(Usuario usu) throws SQLException {
+        Usuario u = new Usuario();
+
+        PreparedStatement ps = cn.prepareStatement("SELECT *  FROM Usuario WHERE Nick = ?");
+        ps.setString(1, usu.getNick());
+
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+
+            u.setId(rs.getInt("ID"));
+            u.setNick(usu.getNick());
+            u.setNombre(rs.getString("Nombre"));
+            u.setApellido(rs.getString("Apellido"));
+            u.setPass(rs.getString("Contrasenia"));
+
+        }
+
+        return u;
+    }
+
+    public void cambiarPass(Usuario usu, String pass) throws SQLException {
+
+        cn.setAutoCommit(false);
+
+        PreparedStatement ps = cn.prepareStatement("UPDATE Usuario SET Contrasenia = ? WHERE ID = ?");
+        ps.setString(1, getSHA(pass));
+        ps.setInt(2, usu.getId());
+
+        ps.executeUpdate();
+
+        cn.commit();
+        cn.setAutoCommit(true);
+    }
+
+    public void actualizarUsu(int id, Usuario nUsu) throws SQLException {
+
+        cn.setAutoCommit(false);
+
+        PreparedStatement ps = cn.prepareStatement("UPDATE Usuario SET Nick = ?,"
+                + "Nombre = ?, Apellido = ? WHERE ID = ?");
+        ps.setString(1, nUsu.getNick());
+        ps.setString(2, nUsu.getNombre());
+        ps.setString(3, nUsu.getApellido());
+        ps.setInt(4, id);
+        ps.executeUpdate();
+
+        cn.commit();
+        cn.setAutoCommit(true);
+
+    }
+
+    public boolean comprobarNick(String nick) throws SQLException {
+        boolean existe = false;
+
+        PreparedStatement ps = cn.prepareStatement("SELECT *  FROM Usuario WHERE Nick = ?");
+        ps.setString(1, nick);
+
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            existe = true;
+        }
+
+        return existe;
     }
 
 }

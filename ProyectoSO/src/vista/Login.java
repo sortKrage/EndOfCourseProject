@@ -5,10 +5,7 @@
  */
 package vista;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
+import controlador.Usuario;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -179,10 +176,12 @@ public class Login extends javax.swing.JDialog {
             if (validarDatos() && _CONEXION.credenciales(usu, pass)) {
 
                 dispose();
-                Main._USU = usu;
+                Usuario u = new Usuario();
+                u.setNick(usu);
+                Main._USU = _CONEXION.getUsuario(u);
 
             } else {
-                
+
                 jLabelError.setText("* El usuario o la contraseña son incorrectos");
                 jLabelError.setVisible(true);
                 jPasswordField.selectAll();
@@ -253,9 +252,9 @@ public class Login extends javax.swing.JDialog {
         String usu = jTextFieldNombre.getText();
         String con = new String(jPasswordField.getPassword());
 
-        if (!usu.isBlank()) {
+        if (!usu.trim().isEmpty()) {
 
-            if (con.isBlank()) {
+            if (con.trim().isEmpty()) {
 
                 jPasswordField.grabFocus();
                 jPasswordField.setText("");

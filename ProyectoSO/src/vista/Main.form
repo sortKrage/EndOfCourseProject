@@ -74,6 +74,9 @@
                 <Property name="mnemonic" type="int" value="117"/>
                 <Property name="text" type="java.lang.String" value="Usuario"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemUsuActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -278,7 +281,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="0" id="blue" palette="1" red="0" type="palette"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="!Gestiona tu negocio con Hibernate&#xa1;"/>
+            <Property name="text" type="java.lang.String" value="&#xa1;Gestiona tu negocio con Hibernate!"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
