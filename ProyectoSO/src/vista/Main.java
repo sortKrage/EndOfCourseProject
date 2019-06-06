@@ -14,20 +14,22 @@ import javax.swing.JFrame;
  * @author sortkrage
  */
 public class Main extends javax.swing.JFrame {
+    
+    public static String _USU = "Test";
 
     /**
      * Creates new form Main
      */
     public Main() {
-
+        
         JDialog j = new Login(this, true);
         j.setVisible(true);
         initComponents();
         setLocationRelativeTo(this);
         this.getContentPane().setBackground(Color.DARK_GRAY);
         jPanel1.setBackground(Color.BLACK);
-        // jPanel1.add(new ImageIcon(getClass().getResource("/images/crowBlack.jpg")).getImage());
-
+        jMenuItemUsu.setText(_USU);
+        
     }
 
     /**
@@ -50,7 +52,9 @@ public class Main extends javax.swing.JFrame {
         jMenuItemSalir = new javax.swing.JMenuItem();
         jMenuDescargas = new javax.swing.JMenu();
         jMenuAcerca = new javax.swing.JMenu();
+        jMenuItemAcercaDe = new javax.swing.JMenuItem();
         jMenuUsu = new javax.swing.JMenu();
+        jMenuItemUsu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SK - El portal de descargas");
@@ -62,6 +66,8 @@ public class Main extends javax.swing.JFrame {
         jLabel1.setText("NOVEDADES");
 
         jLabel2.setText("No hay novedades importantes");
+
+        jPanel1.setBackground(java.awt.Color.black);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -114,9 +120,26 @@ public class Main extends javax.swing.JFrame {
         jMenuBar1.add(jMenuDescargas);
 
         jMenuAcerca.setText("Acerca de");
+
+        jMenuItemAcercaDe.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemAcercaDe.setMnemonic('d');
+        jMenuItemAcercaDe.setText("Acerca de");
+        jMenuItemAcercaDe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAcercaDeActionPerformed(evt);
+            }
+        });
+        jMenuAcerca.add(jMenuItemAcercaDe);
+
         jMenuBar1.add(jMenuAcerca);
 
         jMenuUsu.setText("Usuario");
+
+        jMenuItemUsu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemUsu.setMnemonic('u');
+        jMenuItemUsu.setText("Usuario");
+        jMenuUsu.add(jMenuItemUsu);
+
         jMenuBar1.add(jMenuUsu);
 
         setJMenuBar(jMenuBar1);
@@ -163,6 +186,15 @@ public class Main extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItemAbrirActionPerformed
 
+    private void jMenuItemAcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAcercaDeActionPerformed
+        // TODO add your handling code here:
+        
+        JFrame frame = new AcercaDe();
+        
+        frame.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItemAcercaDeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -207,7 +239,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuDescargas;
     private javax.swing.JMenuItem jMenuItemAbrir;
+    private javax.swing.JMenuItem jMenuItemAcercaDe;
     private javax.swing.JMenuItem jMenuItemSalir;
+    private javax.swing.JMenuItem jMenuItemUsu;
     private javax.swing.JMenu jMenuUsu;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu.Separator jSeparator;

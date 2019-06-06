@@ -5,17 +5,44 @@
  */
 package vista;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import modelo.Persistencia;
+
 /**
  *
  * @author sortkrage
  */
 public class Login extends javax.swing.JDialog {
 
+    public static Persistencia _CONEXION;
+
     /**
      * Creates new form Login
+     *
+     * @param parent
+     * @param modal
      */
     public Login(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+
+        try {
+
+            _CONEXION = new Persistencia();
+
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(this, "No se ha podido conectar con el servidor", "ERROR FATAL",
+                    JOptionPane.ERROR_MESSAGE);
+            System.exit(-1);
+
+        }
+
         initComponents();
         setLocationRelativeTo(this);
         jLabelError.setVisible(false);
@@ -54,6 +81,11 @@ public class Login extends javax.swing.JDialog {
         jLabelPass.setText("Contraseña: ");
 
         jButtonInit.setText("Iniciar Sesión");
+        jButtonInit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInitActionPerformed(evt);
+            }
+        });
 
         jButtonInvi.setText("Entrar como Invitado");
         jButtonInvi.addActionListener(new java.awt.event.ActionListener() {
@@ -137,6 +169,31 @@ public class Login extends javax.swing.JDialog {
 
     }//GEN-LAST:event_jButtonInviActionPerformed
 
+    private void jButtonInitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInitActionPerformed
+        // TODO add your handling code here:
+
+        String usu = jTextFieldNombre.getText();
+        String pass = new String(jPasswordField.getPassword());
+
+        try {
+            if (validarDatos() && _CONEXION.credenciales(usu, pass)) {
+
+                dispose();
+                Main._USU = usu;
+
+            } else {
+                
+                jLabelError.setText("* El usuario o la contraseña son incorrectos");
+                jLabelError.setVisible(true);
+                jPasswordField.selectAll();
+
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jButtonInitActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -189,4 +246,36 @@ public class Login extends javax.swing.JDialog {
     private javax.swing.JPasswordField jPasswordField;
     private javax.swing.JTextField jTextFieldNombre;
     // End of variables declaration//GEN-END:variables
+
+    private boolean validarDatos() {
+        boolean val = true;
+
+        String usu = jTextFieldNombre.getText();
+        String con = new String(jPasswordField.getPassword());
+
+        if (!usu.isBlank()) {
+
+            if (con.isBlank()) {
+
+                jPasswordField.grabFocus();
+                jPasswordField.setText("");
+                jLabelError.setText("* La contraseña está vacío");
+                jLabelError.setVisible(true);
+                val = false;
+
+            }
+
+        } else {
+
+            jTextFieldNombre.grabFocus();
+            jTextFieldNombre.setText("");
+            jLabelError.setText("* El nombre de usuario está vacío");
+            jLabelError.setVisible(true);
+            val = false;
+
+        }
+
+        return val;
+    }
+
 }
