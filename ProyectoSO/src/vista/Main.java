@@ -26,6 +26,13 @@ public class Main extends javax.swing.JFrame {
         JDialog j = new Login(this, true);
         j.setVisible(true);
         initComponents();
+
+        if (_USU.getNick().equals("Invitado")) {
+
+            jMenuItemAbrir.setEnabled(false);
+            jMenuItemUsu.setEnabled(false);
+        }
+
         setLocationRelativeTo(this);
         this.getContentPane().setBackground(Color.DARK_GRAY);
         jPanel1.setBackground(Color.BLACK);
@@ -57,6 +64,7 @@ public class Main extends javax.swing.JFrame {
         jSeparator = new javax.swing.JPopupMenu.Separator();
         jMenuItemSalir = new javax.swing.JMenuItem();
         jMenuDescargas = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuAcerca = new javax.swing.JMenu();
         jMenuItemAcercaDe = new javax.swing.JMenuItem();
         jMenuUsu = new javax.swing.JMenu();
@@ -175,6 +183,17 @@ public class Main extends javax.swing.JFrame {
         jMenuBar1.add(jMenuArchivo);
 
         jMenuDescargas.setText("Descargas");
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_J, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setMnemonic('j');
+        jMenuItem1.setText("Descargas");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenuDescargas.add(jMenuItem1);
+
         jMenuBar1.add(jMenuDescargas);
 
         jMenuAcerca.setText("Acerca de");
@@ -228,11 +247,11 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -271,6 +290,13 @@ public class Main extends javax.swing.JFrame {
         dialog.setVisible(true);
 
     }//GEN-LAST:event_jMenuItemUsuActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+
+        JDialog jd = new Descargas(this, true);
+
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -318,6 +344,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuArchivo;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuDescargas;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItemAbrir;
     private javax.swing.JMenuItem jMenuItemAcercaDe;
     private javax.swing.JMenuItem jMenuItemSalir;

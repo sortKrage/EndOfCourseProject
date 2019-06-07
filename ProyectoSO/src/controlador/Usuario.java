@@ -16,7 +16,7 @@ public class Usuario {
     String nick, nombre, apellido, pass;
 
     public Usuario() {
-
+        this.nick = "Invitado";
     }
 
     public Usuario(int id, String nick, String nombre, String apellido, String pass) {
