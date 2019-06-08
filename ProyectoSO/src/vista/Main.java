@@ -31,6 +31,7 @@ public class Main extends javax.swing.JFrame {
 
             jMenuItemAbrir.setEnabled(false);
             jMenuItemUsu.setEnabled(false);
+            jMenuItemDescargas.setEnabled(false);
         }
 
         setLocationRelativeTo(this);
@@ -64,7 +65,7 @@ public class Main extends javax.swing.JFrame {
         jSeparator = new javax.swing.JPopupMenu.Separator();
         jMenuItemSalir = new javax.swing.JMenuItem();
         jMenuDescargas = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItemDescargas = new javax.swing.JMenuItem();
         jMenuAcerca = new javax.swing.JMenu();
         jMenuItemAcercaDe = new javax.swing.JMenuItem();
         jMenuUsu = new javax.swing.JMenu();
@@ -184,15 +185,15 @@ public class Main extends javax.swing.JFrame {
 
         jMenuDescargas.setText("Descargas");
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_J, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem1.setMnemonic('j');
-        jMenuItem1.setText("Descargas");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemDescargas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_J, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemDescargas.setMnemonic('j');
+        jMenuItemDescargas.setText("Descargas");
+        jMenuItemDescargas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuItemDescargasActionPerformed(evt);
             }
         });
-        jMenuDescargas.add(jMenuItem1);
+        jMenuDescargas.add(jMenuItemDescargas);
 
         jMenuBar1.add(jMenuDescargas);
 
@@ -291,12 +292,12 @@ public class Main extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuItemUsuActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMenuItemDescargasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDescargasActionPerformed
         // TODO add your handling code here:
 
         JDialog jd = new Descargas(this, true);
 
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMenuItemDescargasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -344,9 +345,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuArchivo;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuDescargas;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItemAbrir;
     private javax.swing.JMenuItem jMenuItemAcercaDe;
+    private javax.swing.JMenuItem jMenuItemDescargas;
     private javax.swing.JMenuItem jMenuItemSalir;
     private javax.swing.JMenuItem jMenuItemUsu;
     private javax.swing.JMenu jMenuUsu;
