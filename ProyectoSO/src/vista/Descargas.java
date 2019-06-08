@@ -6,13 +6,17 @@
 package vista;
 
 import controlador.Ejecutar;
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Enumeration;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import org.apache.commons.net.ftp.FTPClient;
 
 /**
  *
@@ -21,13 +25,43 @@ import javax.swing.JOptionPane;
 public class Descargas extends javax.swing.JDialog {
 
     Properties prop;
+    FTPClient client;
 
     /**
      * Creates new form Descargas
+     *
+     * @param parent
+     * @param modal
      */
     public Descargas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        client = new FTPClient();
+
+        try {
+
+            client.connect("192.168.1.48");
+            client.login("Anonymous", "");
+
+            Object[] list = client.listNames();
+
+            DefaultListModel dlm = new DefaultListModel();
+
+            for (Object object : list) {
+
+                dlm.addElement(object);
+
+            }
+
+            jList1.setModel(dlm);
+
+        } catch (IOException ex) {
+            Logger.getLogger(Descargas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        setLocationRelativeTo(this);
+
     }
 
     /**
@@ -47,6 +81,8 @@ public class Descargas extends javax.swing.JDialog {
         jButtonRefresh3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jPanel1.setBackground(java.awt.Color.black);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -127,13 +163,19 @@ public class Descargas extends javax.swing.JDialog {
 
             String name = jList1.getModel().getElementAt(jList1.getSelectedIndex());
 
-            Ejecutar e = new Ejecutar(String.valueOf(prop.get(name)));
+            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream("/home/sortkrage/Descargas/" + name));
 
-            e.launch();
+            if (client.retrieveFile(name, bos)) {
+                
+                actualizarFichero();
+                JOptionPane.showMessageDialog(this, "Descarga realizada correctamente", "¡Correcto!", JOptionPane.INFORMATION_MESSAGE);
+
+            }
 
         } catch (IOException ex) {
 
-            JOptionPane.showMessageDialog(this, "ERROR FATRAL");
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "ERROR FATAL");
 
         }
     }//GEN-LAST:event_jButtonDescargarActionPerformed
@@ -192,9 +234,6 @@ public class Descargas extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonDescargar;
-    private javax.swing.JButton jButtonRefresh;
-    private javax.swing.JButton jButtonRefresh1;
-    private javax.swing.JButton jButtonRefresh2;
     private javax.swing.JButton jButtonRefresh3;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JList<String> jList1;
@@ -216,5 +255,11 @@ public class Descargas extends javax.swing.JDialog {
         }
 
         jList1.setModel(dlm);
+    }
+
+    private void actualizarFichero() {
+        
+        // Code Logic
+        
     }
 }
