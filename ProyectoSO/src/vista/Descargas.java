@@ -6,15 +6,15 @@
 package vista;
 
 import controlador.Ejecutar;
+import java.awt.Color;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Enumeration;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import org.apache.commons.net.ftp.FTPClient;
 
@@ -35,30 +35,27 @@ public class Descargas extends javax.swing.JDialog {
      */
     public Descargas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();
-
-        client = new FTPClient();
 
         try {
 
-            client.connect("192.168.1.48");
+            prop = new Properties();
+            prop.load(new InputStreamReader(Ejecutar.class.getResourceAsStream("Sesion.properties")));  
+
+            client = Login._SERVER;
             client.login("Anonymous", "");
-
-            Object[] list = client.listNames();
-
-            DefaultListModel dlm = new DefaultListModel();
-
-            for (Object object : list) {
-
-                dlm.addElement(object);
-
-            }
-
-            jList1.setModel(dlm);
+            initComponents();
+            cargarLista();
 
         } catch (IOException ex) {
-            Logger.getLogger(Descargas.class.getName()).log(Level.SEVERE, null, ex);
+
+            JOptionPane.showMessageDialog(this, "No se ha podido conectar con el servidor",
+                    "ERROR FATAL", JOptionPane.ERROR_MESSAGE);
+
+            System.exit(-1);
+
         }
+
+        this.getContentPane().setBackground(Color.DARK_GRAY);
 
         setLocationRelativeTo(this);
 
@@ -81,6 +78,7 @@ public class Descargas extends javax.swing.JDialog {
         jButtonRefresh3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(java.awt.Color.darkGray);
 
         jPanel1.setBackground(java.awt.Color.black);
 
@@ -163,11 +161,22 @@ public class Descargas extends javax.swing.JDialog {
 
             String name = jList1.getModel().getElementAt(jList1.getSelectedIndex());
 
-            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream("/home/sortkrage/Descargas/" + name));
+            JFileChooser chooser = new JFileChooser();
+            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            int returnVal = chooser.showOpenDialog(this);
+
+            String path = null;
+
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+
+                path = chooser.getSelectedFile().getAbsolutePath();
+            }
+
+            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(path + "/" + name));
 
             if (client.retrieveFile(name, bos)) {
-                
-                actualizarFichero();
+
+                actualizarFichero(name, path);
                 JOptionPane.showMessageDialog(this, "Descarga realizada correctamente", "¡Correcto!", JOptionPane.INFORMATION_MESSAGE);
 
             }
@@ -243,23 +252,23 @@ public class Descargas extends javax.swing.JDialog {
 
     private void cargarLista() throws IOException {
 
-        prop = new Properties();
-        prop.load(new InputStreamReader(Ejecutar.class.getResourceAsStream("Sesion.properties")));
-        Enumeration<Object> keys = prop.keys();
+        Object[] list = client.listNames();
+
         DefaultListModel dlm = new DefaultListModel();
 
-        while (keys.hasMoreElements()) {
-            Object nextElement = keys.nextElement();
-            dlm.addElement(nextElement);
+        for (Object object : list) {
+
+            dlm.addElement(object);
 
         }
 
         jList1.setModel(dlm);
     }
 
-    private void actualizarFichero() {
-        
-        // Code Logic
-        
+    private void actualizarFichero(String name, String path) throws IOException {
+
+        prop.setProperty(name, path);
+        prop.store(new FileWriter("src/controlador/Sesion.properties"), "Propiedad añadida por el usuario");
+
     }
 }

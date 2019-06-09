@@ -7,11 +7,14 @@ package vista;
 
 import controlador.Usuario;
 import java.awt.Frame;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import modelo.Persistencia;
+import org.apache.commons.net.ftp.FTPClient;
 
 /**
  *
@@ -20,6 +23,7 @@ import modelo.Persistencia;
 public class Login extends javax.swing.JDialog {
 
     public static Persistencia _CONEXION;
+    public static FTPClient _SERVER;
     public Frame parent;
 
     /**
@@ -37,7 +41,10 @@ public class Login extends javax.swing.JDialog {
 
             _CONEXION = new Persistencia();
 
-        } catch (Exception e) {
+            _SERVER = new FTPClient();
+            _SERVER.connect("192.168.1.48");
+
+        } catch (IOException | SQLException e) {
 
             JOptionPane.showMessageDialog(this, "No se ha podido conectar con el servidor", "ERROR FATAL",
                     JOptionPane.ERROR_MESSAGE);

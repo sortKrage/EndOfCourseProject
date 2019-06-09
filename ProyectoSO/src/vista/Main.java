@@ -268,9 +268,9 @@ public class Main extends javax.swing.JFrame {
     private void jMenuItemAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAbrirActionPerformed
         // TODO add your handling code here:
 
-        JFrame frame = new Abrir();
+        JDialog jd = new Abrir(this, true);
 
-        frame.setVisible(true);
+        jd.setVisible(true);
 
     }//GEN-LAST:event_jMenuItemAbrirActionPerformed
 
@@ -296,6 +296,7 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         JDialog jd = new Descargas(this, true);
+        jd.setVisible(true);
 
     }//GEN-LAST:event_jMenuItemDescargasActionPerformed
 

@@ -22,14 +22,15 @@ import javax.swing.JOptionPane;
  *
  * @author sortkrage
  */
-public class Abrir extends javax.swing.JFrame {
+public class Abrir extends javax.swing.JDialog {
+
+    Properties prop;
 
     /**
      * Creates new form Abrir
      */
-    Properties prop;
-
-    public Abrir() {
+    public Abrir(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
 
         setLocationRelativeTo(this);
@@ -40,7 +41,6 @@ public class Abrir extends javax.swing.JFrame {
         try {
             cargarLista();
         } catch (IOException ex) {
-            Logger.getLogger(Abrir.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -53,19 +53,43 @@ public class Abrir extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        jButtonRefresh = new javax.swing.JButton();
+        jButtonAniadir = new javax.swing.JButton();
+        jButtonAbrir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
-        jButtonAbrir = new javax.swing.JButton();
-        jButtonAniadir = new javax.swing.JButton();
-        jButtonRefresh = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Abrir Aplicaciones");
         setBackground(java.awt.Color.darkGray);
-        setBounds(new java.awt.Rectangle(0, 0, 1152, 720));
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        jButtonRefresh.setText("Refrescar");
+        jButtonRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRefreshActionPerformed(evt);
+            }
+        });
+
+        jButtonAniadir.setText("¿No está en la lista?");
+        jButtonAniadir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAniadirActionPerformed(evt);
+            }
+        });
+
+        jButtonAbrir.setText("Abrir");
+        jButtonAbrir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAbrirActionPerformed(evt);
+            }
+        });
+
+        jList1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(jList1);
+
+        jPanel1.setBackground(java.awt.Color.black);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -79,7 +103,7 @@ public class Abrir extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,31 +112,6 @@ public class Abrir extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addContainerGap(24, Short.MAX_VALUE))
         );
-
-        jList1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(jList1);
-
-        jButtonAbrir.setText("Abrir");
-        jButtonAbrir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAbrirActionPerformed(evt);
-            }
-        });
-
-        jButtonAniadir.setText("¿No está en la lista?");
-        jButtonAniadir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAniadirActionPerformed(evt);
-            }
-        });
-
-        jButtonRefresh.setText("Refrescar");
-        jButtonRefresh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonRefreshActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -151,23 +150,16 @@ public class Abrir extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirActionPerformed
+    private void jButtonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshActionPerformed
         try {
             // TODO add your handling code here:
 
-            String name = jList1.getModel().getElementAt(jList1.getSelectedIndex());
-
-            Ejecutar e = new Ejecutar(String.valueOf(prop.get(name)));
-
-            e.launch();
+            cargarLista();
 
         } catch (IOException ex) {
-            
-            JOptionPane.showMessageDialog(this, "ERROR FATRAL");
-            
-        }
 
-    }//GEN-LAST:event_jButtonAbrirActionPerformed
+        }
+    }//GEN-LAST:event_jButtonRefreshActionPerformed
 
     private void jButtonAniadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAniadirActionPerformed
         // TODO add your handling code here:
@@ -180,23 +172,26 @@ public class Abrir extends javax.swing.JFrame {
                 aniadir(jfc.getSelectedFile().getName(), jfc.getSelectedFile().getAbsolutePath());
 
             } catch (IOException ex) {
-                Logger.getLogger(Abrir.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
     }//GEN-LAST:event_jButtonAniadirActionPerformed
 
-    private void jButtonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshActionPerformed
+    private void jButtonAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirActionPerformed
         try {
             // TODO add your handling code here:
 
-            cargarLista();
-            
-        } catch (IOException ex) {
-            Logger.getLogger(Abrir.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            String name = jList1.getModel().getElementAt(jList1.getSelectedIndex());
 
-    }//GEN-LAST:event_jButtonRefreshActionPerformed
+            Ejecutar e = new Ejecutar(String.valueOf(prop.get(name)));
+
+            e.launch();
+
+        } catch (IOException ex) {
+
+            JOptionPane.showMessageDialog(this, "ERROR FATRAL");
+
+        }
+    }//GEN-LAST:event_jButtonAbrirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -225,23 +220,20 @@ public class Abrir extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Abrir().setVisible(true);
+                Abrir dialog = new Abrir(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAbrir;
-    private javax.swing.JButton jButtonAniadir;
-    private javax.swing.JButton jButtonRefresh;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    // End of variables declaration//GEN-END:variables
 
     private void cargarLista() throws IOException {
 
@@ -266,4 +258,14 @@ public class Abrir extends javax.swing.JFrame {
         prop.store(new FileWriter("src/controlador/Sesion.properties"), "Propiedad añadida por el usuario");
 
     }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAbrir;
+    private javax.swing.JButton jButtonAniadir;
+    private javax.swing.JButton jButtonRefresh;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    // End of variables declaration//GEN-END:variables
 }
