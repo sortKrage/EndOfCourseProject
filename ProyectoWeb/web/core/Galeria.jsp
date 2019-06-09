@@ -5,24 +5,22 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="vista.Abrir" %>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel=stylesheet href="index.css" type="text/css">
+        <link rel=stylesheet href="Galeria.css" type="text/css">
         <title>SK - El portal de descargas</title>
     </head>
     <body>
         <div id="content">
             <div id="header_1">
-                <a href="index.jsp">
-                    <img src="images/crow.png" alt="Inicio" height="125" width="125"/>
+                <a href="../index.jsp">
+                    <img src="../images/crow.png" alt="Inicio" height="125" width="125"/>
                 </a>
                 <h1 id="tit">Sort Krage</h1>
-                <ul id="menu_1">
-                    <li><a href="../srv/ftp/SortKrage.deb">Instalar</a></li>
-                    <li><a href="core/login.jsp">Iniciar Sesión</a></li>
-                </ul>
             </div>
             <div id="header_2">
                 <ul id="menu_2">

@@ -1,0 +1,131 @@
+/* 
+    Created on : 20-abr-2019, 11:43:06
+    Author     : sortKrage
+*/
+
+html,body {
+
+    background-image: url("../images/Fondo.jpg");
+    height: 200%;
+
+}
+
+#content {
+
+    float: bottom;
+    width: 95%;
+    height: 100%;
+    margin: auto auto;
+
+}
+
+#header_1 {
+
+    float: left;
+    width: 100%;
+    height: 125px;
+    background-color: black;
+
+}
+
+#tit {
+
+    float: left;
+    color: white;
+    margin-top: 45px;
+    margin-left: 15px;
+
+}
+
+#menu_1 {
+
+    float: right;
+    list-style: none;
+    margin: 10px;
+    padding: 0;
+    background-color: #333;
+    width: content-box;
+    height: content-box;
+
+}
+
+#menu_1 li {
+
+    float: right;
+    border-right: 1px solid black;
+    border-left : 1px solid black;
+
+}
+
+#menu_1 li a {
+
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+
+}
+
+#menu_1 li a:hover {
+
+    transition: 1s;
+    background-color: #4CAF50;
+    color: black;
+
+}
+
+#menu_1 li a:active {
+
+    background-color: #4CAF50;
+
+}
+
+#menu_2 {
+
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    background-color: #333;
+    overflow: auto;
+
+}
+
+#menu_2 li {
+
+    float: left;
+    border-left: 1px solid black;
+
+}
+
+#menu_2  li a {
+
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 10px 29px 10px 29px;
+    text-decoration: none;
+
+}
+#menu_2 li a:hover {
+
+    transition: 1s;
+    background-color: #4CAF50;
+    color: black;
+
+}
+
+#menu_2 li a:active {
+
+    background-color: #4CAF50;
+
+}
+
+#wigdet_1 {
+
+    float: left;
+    width: 100%;
+    height: 250px;
+    background-color: black;
+
+}
