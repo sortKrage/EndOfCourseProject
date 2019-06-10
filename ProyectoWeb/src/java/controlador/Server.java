@@ -9,8 +9,6 @@ import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
-import javax.swing.ListModel;
 import org.apache.commons.net.ftp.FTPClient;
 
 /**
@@ -27,7 +25,7 @@ public class Server {
 
     }
 
-    public ListModel<String> cargarLista() throws IOException {
+    public DefaultListModel cargarLista() throws IOException {
 
         Object[] list = client.listNames();
 
