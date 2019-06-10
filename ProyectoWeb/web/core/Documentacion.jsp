@@ -1,16 +1,17 @@
 <%-- 
-    Document   : AcercaDe
-    Created on : 10-jun-2019, 11:30:37
+    Document   : Documentacion
+    Created on : 10-jun-2019, 12:50:57
     Author     : sortkrage
 --%>
 
 <%@page import="controlador.Usuario"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+
 <%
     HttpSession s = request.getSession();
 %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -50,11 +51,7 @@
             <div id="core">
                 <div id="wigdet">
                     <p>
-                        Este proyecto ha sido realizado por David García<br>
-                        como parte del módulo de "Proyecto" del instituto:<br><br>
-                        <a href="https://www.educa2.madrid.org/web/centro.ies.lazarocardenas.colladovillalba" target="_blank">I.E.S. Lázaro Cárdenas</a><br><br>
-                        Contacto: bygetva13@gmail.com<br>
-                        2019 Sort Krage, Inc. Copyright &copy;
+                        Pulsa <a href="/srv/src/Memoria.pdf">aquí</a>. Para descargar la documentación del proyecto.
                     </p>
                 </div>
             </div>

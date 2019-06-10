@@ -4,7 +4,13 @@
     Author     : sortkrage
 --%>
 
+<%@page import="controlador.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+    HttpSession s = request.getSession(true);
+%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -28,9 +34,18 @@
                 <ul id="menu_2">
                     <li><a href="core/Galeria.jsp">Tu Galería</a></li>
                     <li><a href="core/Explorar.jsp">Explorar</a></li>
-                    <li><a href="#Soporte">Documentación</a></li>
+                    <li><a href="core/Documentacion.jsp">Documentación</a></li>
                     <li><a href="core/AcercaDe.jsp">Acerca de</a></li>
-                    <li style="float: right"><a href="#Usuario">Usuario</a></li>
+                    <li style="float: right"><a href="core/Usuario.jsp">
+                            <%
+                                Usuario u = (Usuario) s.getAttribute("usuario");
+                                if (u == null) {
+                                    out.println("Invitado");
+                                } else {
+                                    out.println(u.getNick());
+                                }
+                            %>
+                        </a></li>
                 </ul>
             </div>
             <div class="widget">

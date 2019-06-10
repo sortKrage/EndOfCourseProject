@@ -13,6 +13,15 @@
         <title>Inicia Sesión</title>
     </head>
     <body>
+        <%
+            HttpSession s = request.getSession();
+            String r = (String) s.getAttribute("redirect");
+            if (r != null) {
+        %>
+        <script>alert("El nick ya está cogido");</script>
+        <%
+            }
+        %>
         <div id="header_1">
             <a href="../index.jsp">
                 <img src="../images/crow.png" alt="Inicio" height="125" width="125"/>
@@ -21,23 +30,59 @@
         </div>
         <div id="core">
             <div id="content">
-                <form>
+                <form name="formCrear" action="ValidarCuenta.jsp" method="post" onsubmit="return validar()">
                     <p>Nombre:</p>
                     <input type="text" name="nombre"/>
                     <p>Apellidos: </p>
                     <input type="text" name="ape"/>
                     <p>Usuario: </p>
-                    <input type="text" name="usuario"/>
+                    <input type="text" name="nick"/>
                     <p>Contraseña: </p>
                     <input type="password" name="contrasenia"/>
                     <br/><br/>
-                    <input type="button" value="Crear Cuenta"/>
+                    <input type="submit" value="Crear Cuenta"/>
                     <a href="../index.jsp" style="text-decoration: none">
                         <input type="button" value="Cancelar">
                     </a>
                 </form>
-
             </div>
         </div>
+        <script>
+            function validar() {
+                with (document.formInit.nombre) {
+                    if (value == "") {
+                        alert("No se ha introducido ningún nombre")
+                        focus()
+                        return false
+                    } else {
+                        with (document.formInit.ape) {
+                            if (value == "") {
+                                alert("El apellido está vacío")
+                                focus()
+                                return false
+                            } else {
+                                with (document.formInit.nick) {
+                                    if (value == "") {
+                                        alert("El nick está vacío")
+                                        focus()
+                                        return false
+                                    } else {
+                                        with (document.formInit.contrasenia) {
+                                            if (value == "") {
+                                                alert("La contrasenia está vacía")
+                                                focus()
+                                                return false
+                                            } else {
+                                                return true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
     </body>
 </html> 

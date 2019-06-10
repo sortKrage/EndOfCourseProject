@@ -44,6 +44,8 @@ public class Login extends javax.swing.JDialog {
             _SERVER = new Server();
 
         } catch (IOException | SQLException en) {
+            
+            en.printStackTrace();
 
             JOptionPane.showMessageDialog(this, "No se ha podido conectar con el servidor", "ERROR FATAL",
                     JOptionPane.ERROR_MESSAGE);

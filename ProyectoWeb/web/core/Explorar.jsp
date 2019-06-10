@@ -32,10 +32,17 @@
                 <ul id="menu_2">
                     <li><a href="Galeria.jsp">Tu Galería</a></li>
                     <li><a href="Explorar.jsp">Explorar</a></li>
-                    <li><a href="#Soporte">Documentación</a></li>
-                    <li><a href="#AcercaDe">Acerca de</a></li>
-                    <li style="float: right"><a href="#Usuario">Usuario</a></li>
-                </ul>
+                    <li><a href="Documentacion.jsp">Documentación</a></li>
+                    <li><a href="AcercaDe.jsp">Acerca de</a></li>
+                    <li style="float: right"><a href="Usuario.jsp">
+                            <%
+                                if (u == null) {
+                                    out.println("Invitado");
+                                } else {
+                                    out.println(u.getNick());
+                                }
+                            %>
+                        </a></li>                </ul>
             </div>
             <div id="widget">
                 <table style="width: 100%">
@@ -43,7 +50,7 @@
                         <th>Lista de Descargas</th>
                     </tr>
                     <%
-                        File f = new File("/srv/ftp/");
+                        File f = new File("srv/ftp/");
                         String[] files = f.list();
                         for (int i = 0; i < files.length; i++) {
                     %>

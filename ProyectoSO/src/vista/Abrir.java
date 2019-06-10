@@ -9,6 +9,8 @@ import controlador.Ejecutar;
 import controlador.Fichero;
 import java.awt.Color;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -28,6 +30,13 @@ public class Abrir extends javax.swing.JDialog {
      */
     public Abrir(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+
+        try {
+            f = new Fichero();
+        } catch (IOException ex) {
+            Logger.getLogger(Abrir.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         initComponents();
 
         setLocationRelativeTo(this);

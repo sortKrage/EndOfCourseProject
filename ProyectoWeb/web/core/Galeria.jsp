@@ -35,10 +35,17 @@
                 <ul id="menu_2">
                     <li><a href="Galeria.jsp">Tu Galería</a></li>
                     <li><a href="Explorar.jsp">Explorar</a></li>
-                    <li><a href="#Soporte">Documentación</a></li>
-                    <li><a href="#AcercaDe">Acerca de</a></li>
-                    <li style="float: right"><a href="#Usuario">Usuario</a></li>
-                </ul>
+                    <li><a href="Documentacion.jsp">Documentación</a></li>
+                    <li><a href="AcercaDe.jsp">Acerca de</a></li>
+                    <li style="float: right"><a href="Usuario.jsp">
+                            <%
+                                if (u == null) {
+                                    out.println("Invitado");
+                                } else {
+                                    out.println(u.getNick());
+                                }
+                            %>
+                        </a></li>                </ul>
             </div>
             <div id="widget">
                 <%
@@ -55,7 +62,7 @@
                     </tr>
                     <%
                         Properties p = new Properties();
-                        p.load(new FileReader(new File("prop/name_usuario")));
+                        p.load(new FileReader(new File("prop/" + u.getNick())));
                         Enumeration e = p.keys();
                         while (e.hasMoreElements()) {
                             Object nextElement = e.nextElement();

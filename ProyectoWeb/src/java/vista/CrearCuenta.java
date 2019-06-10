@@ -9,6 +9,7 @@ import controlador.Usuario;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import modelo.Persistencia;
 
 /**
@@ -205,7 +206,7 @@ public class CrearCuenta extends javax.swing.JDialog {
                 jLabelWarn.setVisible(true);
 
             } else {
-                
+
                 jLabelWarn.setVisible(false);
 
                 String pass = new String(jPasswordFieldPass.getPassword());
@@ -218,8 +219,11 @@ public class CrearCuenta extends javax.swing.JDialog {
                     u.setNombre(jTextFieldNom.getText());
                     u.setApellido(jTextFieldApe.getText());
                     u.setPass(new String(jPasswordFieldConfirm.getPassword()));
-                    
+
                     p.guardarUsu(u);
+
+                    JOptionPane.showMessageDialog(this, "Usuario creado correctamente", "Corecto!", JOptionPane.INFORMATION_MESSAGE);
+                    dispose();
 
                 } else {
 
@@ -237,6 +241,9 @@ public class CrearCuenta extends javax.swing.JDialog {
 
     private void jButtonCanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCanActionPerformed
         // TODO add your handling code here:
+
+        dispose();
+
     }//GEN-LAST:event_jButtonCanActionPerformed
 
     /**

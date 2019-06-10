@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -50,5 +51,4 @@ public class Fichero {
         p.store(new FileWriter("src/controlador/Sesion.properties"), "Propiedad añadida por el usuario");
 
     }
-
 }

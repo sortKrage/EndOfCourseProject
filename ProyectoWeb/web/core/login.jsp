@@ -3,6 +3,14 @@
     Created on : 04-jun-2019, 20:52:53
     Author     : sortkrage
 --%>
+<%@page import="modelo.Persistencia"%>
+<%@page import="controlador.Server"%>
+<%@page import="controlador.Usuario"%>
+<%
+    HttpSession s = request.getSession();
+    Usuario u = (Usuario) s.getAttribute("usuario");
+    Persistencia p = new Persistencia();
+%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -21,13 +29,21 @@
         </div>
         <div id="core">
             <div id="content">
-                <form>
-                    <p>Usuario: </p>
-                    <input type="text" name="usuario"/>
+                <%
+                    if (u != null) {
+
+                %>
+                <h1>Ya has iniciados sesión como <% out.println(u.getNick()); %></h1>
+                <%
+                } else {
+                %>
+                <form name="formInit" action="ValidarLogin.jsp" method="post" onsubmit="return validar()" >
+                    <p>Nick: </p>
+                    <input type="text" name="nick"/>
                     <p>Contraseña: </p>
                     <input type="password" name="contrasenia"/>
                     <br/><br/>
-                    <input type="button" value="Iniciar Sesión"/>
+                    <input type="submit" value="Iniciar Sesión"/>
                     <a href="../index.jsp" style="text-decoration: none">
                         <input type="button" value="Cancelar">
                     </a>
@@ -35,8 +51,29 @@
                         ¿No tienes cuenta? <a href="CrearCuenta.jsp">Crea una</a>
                     </p>
                 </form>
-
+                <% }%>
             </div>
         </div>
+        <script>
+            function validar() {
+                with (document.formInit.nick) {
+                    if (value == "") {
+                        alert("No se ha introducido ningún nick")
+                        focus()
+                        return false
+                    } else {
+                        with (document.formInit.constrasenia) {
+                            if (value == "") {
+                                alert("La contraseña está vacía")
+                                focus()
+                                return false
+                            } else {
+                                return true
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
     </body>
 </html>

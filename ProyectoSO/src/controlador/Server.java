@@ -5,7 +5,11 @@
  */
 package controlador;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import javax.swing.DefaultListModel;
@@ -24,12 +28,19 @@ public class Server {
     public Server() throws IOException {
         this.client = new FTPClient();
         client.connect("192.168.1.48");
+        System.out.println(client.getReplyString());
 
     }
 
     public ListModel<String> cargarLista() throws IOException {
 
         Object[] list = client.listNames();
+        
+        if (list == null) {
+            
+            JOptionPane.showMessageDialog(null, "OHOHOH");
+            
+        }
 
         DefaultListModel dlm = new DefaultListModel();
 
@@ -47,6 +58,17 @@ public class Server {
         BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(path + "/" + name));
 
         return client.retrieveFile(name, bos);
+    }
+
+    public boolean crearRegistro(String nick) throws FileNotFoundException, IOException {
+        
+        File f = new File("prop/" + nick + ".properties");
+        
+        f.createNewFile();
+
+        BufferedInputStream bis = new BufferedInputStream(new FileInputStream(f));
+
+        return client.storeFile(nick, bis);
     }
 
 }

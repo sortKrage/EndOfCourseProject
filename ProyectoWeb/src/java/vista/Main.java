@@ -16,7 +16,7 @@ import javax.swing.JFrame;
  */
 public class Main extends javax.swing.JFrame {
 
-    public static Usuario _USU;
+    public static Usuario _USU = new Usuario();
 
     /**
      * Creates new form Main
