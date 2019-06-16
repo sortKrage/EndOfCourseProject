@@ -50,7 +50,7 @@
                         <th>Lista de Descargas</th>
                     </tr>
                     <%
-                        File f = new File("srv/ftp/");
+                        File f = new File("/srv/ftp/");
                         String[] files = f.list();
                         for (int i = 0; i < files.length; i++) {
                     %>

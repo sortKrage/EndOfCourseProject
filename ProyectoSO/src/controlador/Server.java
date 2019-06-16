@@ -27,7 +27,8 @@ public class Server {
 
     public Server() throws IOException {
         this.client = new FTPClient();
-        client.connect("192.168.1.48");
+        client.connect("192.168.1.48", 21);
+        client.login("anonymous", "");
         System.out.println(client.getReplyString());
 
     }
@@ -35,11 +36,11 @@ public class Server {
     public ListModel<String> cargarLista() throws IOException {
 
         Object[] list = client.listNames();
-        
+
         if (list == null) {
-            
+
             JOptionPane.showMessageDialog(null, "OHOHOH");
-            
+
         }
 
         DefaultListModel dlm = new DefaultListModel();
@@ -61,9 +62,9 @@ public class Server {
     }
 
     public boolean crearRegistro(String nick) throws FileNotFoundException, IOException {
-        
+
         File f = new File("prop/" + nick + ".properties");
-        
+
         f.createNewFile();
 
         BufferedInputStream bis = new BufferedInputStream(new FileInputStream(f));

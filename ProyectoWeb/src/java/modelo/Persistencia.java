@@ -5,9 +5,7 @@
  */
 package modelo;
 
-import controlador.Server;
 import controlador.Usuario;
-import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -16,8 +14,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.ResultSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -26,17 +22,18 @@ import java.util.logging.Logger;
 public class Persistencia {
 
     Connection cn;
-    Server s;
+    //Server s;
 
     public Persistencia() throws SQLException {
         try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            this.s = new Server();
 
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IOException ex) {
-            Logger.getLogger(Persistencia.class.getName()).log(Level.SEVERE, null, ex);
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
+
         }
-        this.cn = DriverManager.getConnection("jdbc:mysql://localhost/EndOfCourse", "root", "");
+
+        this.cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/EndOfCourse", "root", "");
 
     }
 

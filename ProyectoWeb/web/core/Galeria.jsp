@@ -61,8 +61,16 @@
                         <th>Lista de Descargas</th>
                     </tr>
                     <%
+                        File f = new File("/prop");
+                        if (!f.exists()) {
+                            f.mkdir();
+                        }
+                        f = new File("/prop/" + u.getNick() + ".properties");
+                        if (!f.exists()) {
+                            f.createNewFile();
+                        }
                         Properties p = new Properties();
-                        p.load(new FileReader(new File("prop/" + u.getNick())));
+                        p.load(new FileReader(f));
                         Enumeration e = p.keys();
                         while (e.hasMoreElements()) {
                             Object nextElement = e.nextElement();
